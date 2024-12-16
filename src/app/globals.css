@@ -1,0 +1,582 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* fonts roboto google */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+:root {
+  --background: #181818;
+  --blue-color: #2666cf;
+  --red-color: #c62e2e;
+  --green-color: #72bf78;
+  --yellow-color: #fabc3f;
+  --white-color: #ffffff;
+  --black-color: #1e1e1e;
+  --grey-color: #D9D9D9;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--white-color);
+  background: var(--background);
+  font-family: "Roboto", sans-serif;
+}
+
+/* navbar */
+
+.pointer{
+  cursor: pointer;
+}
+.navbar {
+  background-color: var(--black-color);
+  padding: 1rem;
+  border-bottom: 1px solid var(--white-color);
+}
+.navbar a {
+  color: var(--white-color);
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 500;
+}
+.navbar a:hover {
+  color: var(--blue-color);
+}
+.navbar-nav {
+  background-color: var(--black-color);
+  padding: 2rem;
+}
+
+/* active dropdown */
+/* .dropdown-toggle .active {
+  background-color: #007bff;
+  color: white; 
+  padding: 10px;
+  border-radius: 10px;
+} */
+
+/* active default */
+.active{
+  background-color: #007bff; 
+  color: white; 
+  padding: 7px;
+  border-radius: 5px;
+}
+
+/* dropdown menu */
+.navbar-nav .dropdown {
+  position: relative;
+}
+
+/* bg Dropdown */
+.navbar-nav .dropdown-menu {
+  position: absolute;
+  top: 100%; /* Menampilkan dropdown tepat di bawah menu utama */
+  left: 0;
+  transform: none; /* Menghapus transformasi default Bootstrap */
+  margin-top: 0; /* Menghilangkan jarak vertikal */
+  background-color: var(--black-color);
+  border: none;
+}
+.navbar-nav .dropdown-item {
+  color: var(--white-color);
+}
+.navbar-nav .dropdown-item:hover {
+  background-color: var(--white-color);
+  color: var(--black-color);
+}
+
+/* component dashboard CARD*/
+.card {
+  min-height: 200px;
+}
+.card-view {
+  margin-top: 2rem;
+}
+.card-view .card {
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: var(--black-color);
+}
+.card-title,
+.card-text {
+  color: var(--white-color);
+}
+.card-text {
+  font-size: 14px;
+}
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+.card .title-ndkeluar {
+  color: var(--red-color);
+  font-size: 40px;
+  font-weight: 600;
+}
+.card .title-disposisi {
+  color: var(--green-color);
+  font-size: 40px;
+  font-weight: 600;
+}
+.card-text-disposisi{
+  color: var(--white-color);
+  font-size: 14px;
+}
+.card-text-disposisi
+span {
+  color: var(--green-color);
+}
+.card .title-ndranmor{
+  color: var(--yellow-color);
+  font-size: 40px;
+  font-weight: 600;
+}
+.card-text-ndranmor{
+  color: var(--white-color);
+  font-size: 14px;
+}
+.card-text-ndranmor span {
+  color: var(--yellow-color);
+}
+.card .title-ndharwat{
+  color: var(--blue-color);
+  font-size: 40px;
+  font-weight: 600;
+}
+.card-text-ndharwat{
+  color: var(--white-color);
+  font-size: 14px;
+}
+.card-text-ndharwat span {
+  color: var(--blue-color);
+}
+
+/* components dashboard chart */
+.mychart{
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+.card-mychart{
+  background-color: var(--black-color);
+  border-radius: 10px;
+  padding: 1rem;
+}
+.card-mychartPolar {
+  background-color: var(--black-color);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+/* COMPONENT DASHBOARD - TITLE */
+.title-dashboard{
+ margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+/* .card-titleDashboard{
+  background-color: var(--black-color);
+  padding: 25px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+} */
+.card-titleDashboard h1{
+  color: var(--grey-color);
+  font-weight: 700;
+  font-size: 23px;
+}
+.card-titleDashboard p {
+  color: var(--grey-color);
+  font-weight: 400;
+  font-size: 15px;
+}
+
+/* COMPONENT NOTA DINAS - DASHAOARD */
+.card-notadinas{
+  margin-top: 2rem;
+}
+.card-notadinas .card {
+  border-radius: 10px;
+}
+.card-notadinas .notadinas {
+  background: var(--black-color);
+}
+
+.notadinas .card-title {
+  color: var(--white-color);
+  font-size: 19px;
+}
+.notadinas .card-text {
+  color: var(--blue-color);
+  font-size: 33px;
+  font-weight: 600;
+}
+.notadinas .card-title-bmp{
+  color: var(--white-color);
+  font-size: 19px;
+}
+.notadinas .card-text-bmp {
+  color: var(--red-color);
+  font-size: 33px;
+  font-weight: 600;
+}
+.notadinas .card-title-harwat {
+  color: var(--white-color);
+  font-size: 19px;
+}
+.notadinas .card-text-harwat {
+  color: var(--red-color);
+  font-size: 33px;
+  font-weight: 600;
+}
+.card-text-bmp .jumlah-bmp{
+  color: var(--yellow-color);
+}
+
+/* COMPONENT NOTA DINAS - BUTTON ACTION TABLE */
+.datatables .action-delete{
+  background-color: var(--red-color);
+  color: var(--white-color);
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 5px;
+}
+.datatables .action-delete:hover{
+  background-color: #212529;
+  border: 1px solid var(--red-color);
+}
+
+.datatables .action-edit{
+  background-color: var(--yellow-color);
+  color: var(--black-color);
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 5px;
+}
+.datatables .action-edit:hover{
+  background-color: #212529;
+  border: 1px solid var(--yellow-color);
+  color: var(--white-color);
+}
+
+/* COMPONENET NOTA DINAS - CHART */
+/* .card-chartNotaDinas{
+  margin-top: 5rem;
+} */
+.card-chartNotaDinas .card{
+  border-radius: 10px;
+  background: var(--black-color);
+}
+
+/* COMPONENT NOTA DINAS - TABLE */
+.datatables{
+  margin-top: 5rem;
+  margin-bottom: 3rem;
+}
+.datatables .card{
+  border-radius: 10px;
+  background: var(--black-color);
+}
+.buat-surat{
+  background-color: var(--green-color);
+  font-weight: 500;
+  font-size: 15px;
+  border-radius:5px ;
+  padding: 5px 10px;
+  color: var(--black-color);
+}
+.pengajuan{
+  background-color: var(--blue-color);
+  font-weight: 500;
+  font-size: 15px;
+  border-radius:5px ;
+  padding: 5px 10px;
+  color: var(--white-color);
+}
+.buat-surat:hover{
+  background-color: var(--black-color);
+  border: 1px solid var(--green-color);
+  color: var(--white-color);
+}
+.pengajuan:hover{
+  background-color: var(--black-color);
+  border: 1px solid var(--blue-color);
+  color: var(--white-color);
+}
+
+/* COMPONENTS NOTA DINAS - INPUT NOTA DINAS */
+.input-notadinas{
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+.input-notadinas .card{
+  border-radius: 10px;
+  background: var(--black-color);
+}
+.input-notadinas .card-title{
+  color: var(--white-color);
+  font-weight: 600;
+  font-size: 24px;
+}
+.input-notadinas input {
+  background-color: var(--grey-color);
+  margin-top: 25px;
+  padding: 12px;
+  border-radius: 20px;
+}
+.input-notadinas input:focus{
+  background-color: var(--grey-color);
+  border: 2px solid var(--red-color);
+  box-shadow: none;
+}
+.input-notadinas select {
+  background-color: var(--grey-color);
+  margin-top: 25px;
+  padding: 12px;
+  border-radius: 20px;
+}
+.input-notadinas select:focus{
+  background-color: var(--grey-color);
+  border: 2px solid var(--red-color);
+  box-shadow: none;
+}
+
+.button-inputnotadinas .btn{
+  background-color: var(--green-color);
+  font-weight: 500;
+  color: var(--black-color);
+  font-size: 20px;
+  margin-top: 55px;
+}
+.button-inputnotadinas .btn:hover{
+  background-color: var(--black-color);
+  color: var(--white-color);
+  border: 1px solid var(--green-color);
+}
+.button-inputnotadinas .reset{
+  background-color: var(--red-color);
+  color: var(--white-color);
+  font-weight: 500;
+  font-size: 20px;
+}
+.button-inputnotadinas .reset:hover{
+  background-color: var(--black-color);
+  color: var(--white-color);
+  border: 1px solid var(--red-color);
+}
+
+/* COMPONENT NOTA DINAS - PENGAJUAN */
+.pengajuan-notadinas {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+.pengajuan-notadinas .card{
+  border-radius: 10px;
+  background: var(--black-color);
+  border: none;
+}
+.back-dashboard{
+  background: var(--blue-color);
+  font-weight: 500;
+  font-size: 15px;
+  border-radius:5px ;
+  padding: 5px 10px;
+  color: var(--white-color);
+}
+.back-dashboard:hover{
+  background-color: var(--black-color);
+  border: 1px solid var(--blue-color);
+  color: var(--white-color);
+}
+
+/* COMPONENTS NOTA DINAS - ARSIP */
+.arsip-notadinas{
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+.arsip-notadinas .card {
+  border-radius: 10px;
+  background: var(--black-color);
+  border: none;
+}
+.back-dashboard-arsip{
+  background: var(--blue-color);
+  color: var(--white-color);
+  font-weight: 500;
+  font-size: 15px;
+}
+.back-dashboard-arsip:hover{
+  background-color: var(--black-color);
+  border: 1px solid var(--blue-color);
+  color: var(--white-color);
+}
+
+/* COMPONENT DISPOSISI - CARD-DISPOSISI */
+.card-disposisi{
+  margin-top: 2rem;
+}
+.card-disposisi .card {
+  border-radius: 10px;
+}
+.card-disposisi .disposisi {
+  background: var(--black-color);
+}
+
+.disposisi .card-title {
+  color: var(--white-color);
+  font-size: 19px;
+}
+.disposisi .card-text {
+  color: var(--green-color);
+  font-size: 33px;
+  font-weight: 600;
+}
+.disposisi .card-title-bmp{
+  color: var(--white-color);
+  font-size: 19px;
+}
+.disposisi .card-text-bmp {
+  color: var(--yellow-color);
+  font-size: 33px;
+  font-weight: 600;
+}
+.disposisi .card-title-harwat {
+  color: var(--white-color);
+  font-size: 19px;
+}
+
+
+/* COMPONENET DISPOSISI - CHART */
+.card-ChartDisposisi .card{
+  border-radius: 10px;
+  background: var(--black-color);
+}
+
+/* COMPONENT DISPOSISI - TABLES */
+.datatablesdisposisi{
+  margin-top: 5rem;
+  margin-bottom: 3rem;
+}
+.datatablesdisposisi .card{
+  border-radius: 10px;
+  background: var(--black-color);
+}
+.buat-disposisi{
+  background-color: var(--red-color);
+  font-weight: 500;
+  font-size: 15px;
+  border-radius:5px ;
+  padding: 5px 10px;
+  color: var(--white-color);
+}
+.buat-disposisi:hover{
+  background-color: var(--black-color);
+  border: 1px solid var(--red-color);
+  color: var(--white-color);
+}
+
+/* COMPONENTS DISPOSISI - INPUT DISPOSISI */
+.input-disposisi{
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+.input-disposisi .card{
+  border-radius: 10px;
+  background: var(--black-color);
+}
+.input-disposisi .card-title{
+  color: var(--white-color);
+  font-weight: 600;
+  font-size: 24px;
+}
+.input-disposisi input {
+  background-color: var(--grey-color);
+  margin-top: 25px;
+  padding: 12px;
+  border-radius: 20px;
+}
+.input-disposisi input:focus{
+  background-color: var(--grey-color);
+  border: 2px solid var(--red-color);
+  box-shadow: none;
+}
+.button-InputDisposisi .btn{
+  background-color: var(--green-color);
+  font-weight: 500;
+  color: var(--black-color);
+  font-size: 20px;
+  margin-top: 55px;
+}
+.button-InputDisposisi .btn:hover{
+  background-color: var(--black-color);
+  color: var(--white-color);
+  border: 1px solid var(--green-color);
+}
+.button-InputDisposisi .reset{
+  background-color: var(--red-color);
+  color: var(--white-color);
+  font-weight: 500;
+  font-size: 20px;
+}
+.button-InputDisposisi .reset:hover{
+  background-color: var(--black-color);
+  color: var(--white-color);
+  border: 1px solid var(--red-color);
+}
+
+/* COMPONNETS MODAL EDIT NOTA DINAS */
+.modal .modal-content{
+  background-color: var(--black-color);
+}
+.modal-content h5{
+  color: var(--white-color);
+  font-weight: 600;
+  font-size: 20px;
+}
+.btn-close{
+  color: var(--white-color);
+}
+.modal-footer .btn {
+  background-color: var(--red-color);
+  color: var(--white-color);
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 5px;
+}
+.modal-footer .btn:hover{
+  background-color: var(--black-color);
+  border: 1px solid var(--red-color);
+}
+
+/* COMPONENT FORM EDIT NOTA DINAS */
+.form-editnotadinas input {
+  background-color: var(--grey-color);
+  padding: 12px;
+  border-radius: 20px;
+}
+.form-editnotadinas input:focus{
+  background-color: var(--grey-color);
+  border: 2px solid var(--red-color);
+  box-shadow: none;
+}
+
+.form-editnotadinas label{
+  color: var(--white-color);
+}
+.form-editnotadinas .btn-editnotadinas{
+  background-color: var(--green-color);
+  font-weight: 500;
+  font-size: 15px;
+  border-radius:5px ;
+  padding: 5px 10px;
+  color: var(--black-color);
+}
+.form-editnotadinas .btn-editnotadinas:hover{
+  background-color: var(--black-color);
+  border: 1px solid var(--green-color);
+  color: var(--white-color);
+}

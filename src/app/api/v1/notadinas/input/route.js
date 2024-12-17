@@ -18,7 +18,7 @@ export async function POST(request) {
         );
     }
 
-    const uploadDir = path.join(process.cwd(), "public/uploads");
+    const uploadDir = path.join(process.cwd(), "public/uploads/notadinasPDF");
     await fs.mkdir(uploadDir, { recursive: true });
 
     const filePath = path.join(uploadDir, file.name);
@@ -31,7 +31,7 @@ export async function POST(request) {
             kepada,
             perihal,
             type_notadinas,
-            notadinas_pdf: `public/uploads/${file.name}`
+            notadinas_pdf: `/uploads/notadinasPDF/${file.name}`
         }
     });
 

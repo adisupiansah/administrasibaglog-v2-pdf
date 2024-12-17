@@ -6,6 +6,8 @@ import { createRoot } from "react-dom/client";
 import EditNotaDinas from "./EditNotaDinas";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Swal from "sweetalert2";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const TablesNotadinas = () => {
 
@@ -219,6 +221,7 @@ const TablesNotadinas = () => {
                           <th>Kepada</th>
                           <th>Hal</th>
                           <th>Tanggal input</th>
+                          <th>File</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -231,6 +234,9 @@ const TablesNotadinas = () => {
                             <td>{item.kepada}</td>
                             <td>{item.perihal}</td>
                             <td>{item.tgl_input}</td>
+                            <td>
+                              <Link href={item.notadinas_pdf} className='btn btn-addtopdf' target='_blank'><FontAwesomeIcon icon={faEye}/></Link>
+                            </td>
                             <td className=''>
                               <button 
                               className='btn btn-sm action-edit col-sm-12' data-bs-toggle="modal" data-bs-target="#staticBackdrop"

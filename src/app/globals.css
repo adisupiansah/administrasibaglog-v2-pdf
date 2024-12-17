@@ -263,6 +263,19 @@ span {
   color: var(--white-color);
 }
 
+.datatables .btn-addtopdf{
+  background-color: var(--blue-color);
+  color: var(--white-color);
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 10px;
+  padding: 5px 7px 5px 7px;
+
+}
+.datatables .btn-addtopdf:hover{
+  background-color: #0649b6;
+}
+
 /* COMPONENET NOTA DINAS - CHART */
 /* .card-chartNotaDinas{
   margin-top: 5rem;

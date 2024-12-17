@@ -7,7 +7,9 @@ const EditNotaDinas = ({ data }) => {
     no_surat: "",
     kepada: "",
     perihal: "",
+    type_notadinas: "",
   });
+  const [file, setFile] = useState(null);
 
   useEffect(() => {
     if (data) {
@@ -27,42 +29,66 @@ const EditNotaDinas = ({ data }) => {
       [name]: value,
     }));
   };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("api/v1/notadinas/edit", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id: data.id, ...formData }),
-      });
-
-      const result = await response.json();
-      if (!response.ok) {
-        throw new Error(result.error);
+      // buat objek FormData untuk mengedit data & file
+      const formDataObj = new FormData();
+      formDataObj.append("id", data.id); // tambahkan ID dari data yang diterima
+      formDataObj.append("tgl_surat", formData.tgl_surat);
+      formDataObj.append("no_surat", formData.no_surat);
+      formDataObj.append("kepada", formData.kepada);
+      formDataObj.append("perihal", formData.perihal);
+      formDataObj.append("type_notadinas", formData.type_notadinas);
+  
+      // tambahkan file hanya jika user memilih file baru
+      if (file) {
+        formDataObj.append("notadinas_pdf", file);
       }
-      
-      Swal.fire({
-        title: "Update Berhasil",
-        text: "Data berhasil diedit",
-        icon: "success",
-        confirmButtonText: "Yes",
-        confirmButtonColor: "#72bf78",
-        color: '#D9D9D9',
-        background: '#212529',
-      }).then((result) => {
+  
+      const response = await fetch("/api/v1/notadinas/edit", {
+        method: "PUT",
+        body: formDataObj,
+      });
+      if (response.ok) {
+        Swal.fire({
+          title: "Berhasil",
+          text: "Data berhasil di edit",
+          icon: "success",
+          confirmButtonColor: "#72bf78",
+          confirmButtonText: "OK",
+          color: "#D9D9D9",
+          background: "#212529",
+        }).then((result) => {
           if (result.isConfirmed) {
             window.location.reload();
           }
-      });
+        })
+      } else {
+        const error = await response.json();
+        Swal.fire({
+          title: "Error",
+          text: error.message || "Terjadi kesalahan saat mengedit data",
+          icon: "error",
+        });
+      }
     } catch (error) {
       console.error("Eror saat edit data:", error);
-      alert("TERJADI KESALAHAN SAAT EDIT DATA");
+      Swal.fire({
+        title: "Error",
+        text: "Terjadi kesalahan pada server",
+        icon: "error",
+      });
     }
   };
-  return (
-    <div className='form-editnotadinas'>
+
+    return (
+    <div className="form-editnotadinas">
       <form onSubmit={handleSubmit}>
         <div className="mt-3">
           <label className="form-label">Tanggal Surat</label>
@@ -104,10 +130,35 @@ const EditNotaDinas = ({ data }) => {
             onChange={handleInputChange}
           />
         </div>
-      <div className='d-flex justify-content-center align-items-center mt-3'>
-        <button className='btn btn-editnotadinas col-md-6'>simpan</button>
-      </div>
-        
+        <div className="mt-3">
+          <label className="form-label">Type Nota dinas</label>
+          <select
+            className="form-select"
+            aria-label="Default select example"
+            name="type_notadinas"
+            value={formData.type_notadinas}
+            onChange={handleInputChange}
+          >
+            <option value="">Pilih Type Nota Dinas</option>
+            <option value="notadinas biasa">notadinas biasa</option>
+            <option value="notadinas BMP">notadinas BMP</option>
+            <option value="notadinas Harwat">notadinas Harwat</option>
+          </select>
+        </div>
+
+        <div className="mt-3">
+          <label className="form-label">File PDF</label>
+          <input
+            type="file"
+            className="form-control"
+            name="notadinas_pdf"
+            accept="application/pdf"
+            onChange={handleFileChange}
+          />
+        </div>
+        <div className="d-flex justify-content-center align-items-center mt-3">
+          <button className="btn btn-editnotadinas col-md-6">simpan</button>
+        </div>
       </form>
     </div>
   );

@@ -1,19 +1,30 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import InitTable from "@/libs/datatables-config";
 import Link from "next/link";
 import { createRoot } from "react-dom/client";
+import Swal from "sweetalert2";
+import EditDisposisi from "./EditDisposisi";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPrint } from "@fortawesome/free-solid-svg-icons";
+
+
 
 const TableDisposisi = () => {
- 
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [editData, setEditData] = useState(null);
+
   const ButtonSurat = () => {
     return (
-      <Link href="#" className="btn buat-disposisi">
+      <Link href="/disposisi/input" className="btn buat-disposisi">
         input disposisi
       </Link>
     );
   };
-  useEffect(() => {
+
+  const DataTables = () => {
     let buatdisposisi = document.createElement("div");
     let root = createRoot(buatdisposisi);
     root.render(<ButtonSurat />);
@@ -43,54 +54,190 @@ const TableDisposisi = () => {
         topEnd: buatdisposisi,
       },
     });
+  };
+
+  const ambilDataDisposisi = async () => {
+    try {
+      const response = await fetch("/api/v1/disposisi/getdisposisi");
+
+      if (!response.ok) {
+        throw new Error("Gagal mengambil data disposisi");
+      }
+
+      const hasil = await response.json();
+      setData(hasil);
+    } catch (error) {
+      console.error("error saat mengambil data", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteData = async (id) => {
+    Swal.fire({
+      title: "Anda Yakin?",
+      text: "Data yang dihapus tidak bisa dikembalikan!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#72bf78",
+      cancelButtonColor: "#c62e2e",
+      confirmButtonText: "Ya, hapus data!",
+      color: "#D9D9D9",
+      background: "#212529",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch(`/api/v1/disposisi/delete?id=${id}`, {
+            method: "DELETE",
+          });
+          await response.json();
+          if (!response.ok) {
+            throw new Error("Gagal menghapus data");
+          }
+          Swal.fire({
+            title: "Berhasil",
+            text: "Data berhasil dihapus",
+            icon: "success",
+            confirmButtonColor: "#72bf78",
+            color: "#D9D9D9",
+            background: "#212529",
+          }).then(async (result) => {
+            if (result.isConfirmed) {
+              window.location.reload();
+            }
+            ambilDataDisposisi();
+          });
+        } catch (error) {
+          console.error("Error saat menghapus data", error);
+          Swal.fire("Gagal", "Data gagal dihapus", "error");
+        }
+      }
+    });
+  };
+
+  const handleEditData = (id) => {
+    const edit = data.find((item) => item.id === id);
+    setEditData(edit);
+  };
+
+  useEffect(() => {
+    if (!loading && data.length > 0) {
+      // Inisialisasi DataTables setelah data tersedia
+      const table =  DataTables();
+      if (table) {
+        table.destroy()
+      }
+    }
+  }, [loading, data]);
+  useEffect(() => {
+    ambilDataDisposisi();
   }, []);
 
+  // use efeect untuk modal
+  useEffect(() => {
+    require("bootstrap/dist/js/bootstrap.bundle.min.js");
+  });
+
   return (
-    <div className="datatablesdisposisi" data-bs-theme="dark">
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <div className="card">
-              <div className="card-body table-responsive">
-                <table
-                  className="table table-striped table-dark p-3 "
-                  id="example"
-                >
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Position</th>
-                      <th>Office</th>
-                      <th>Age</th>
-                      <th>Start date</th>
-                      <th>Salary</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Tiger Nixon</td>
-                      <td>System Architect</td>
-                      <td>Edinburgh</td>
-                      <td>61</td>
-                      <td>2011-04-25</td>
-                      <td>$320,800</td>
-                    </tr>
-                    <tr>
-                      <td>Garrett Winters</td>
-                      <td>Accountant</td>
-                      <td>Tokyo</td>
-                      <td>63</td>
-                      <td>2011-07-25</td>
-                      <td>$170,750</td>
-                    </tr>
-                  </tbody>
-                </table>
+    <>
+      {/* modal disposisi */}
+      <div
+        className="modal fade"
+        id="staticBackdrop"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="staticBackdropLabel">
+                Edit Disposisi
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <EditDisposisi data={editData} />
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn" data-bs-dismiss="modal">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="datatablesdisposisi" data-bs-theme="dark">
+        <div className="container">
+          <div className="row">
+            <div className="col">
+              <div className="card">
+                <div className="card-body table-responsive">
+                  {loading ? (
+                    <p>Loading...</p>
+                  ) : (
+                    <table
+                      className="table table-striped table-dark p-3 "
+                      id="example"
+                    >
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Tanggal surat</th>
+                          <th>Nomor disposisi</th>
+                          <th>Nomor surat</th>
+                          <th>Perihal</th>
+                          <th>Satfung</th>
+                          <th>Tanggal Disposisi</th>
+                          <th>Type Disposisi</th>
+                          <th>Print</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {data.map((item, index) => (
+                          <tr key={item.id}>
+                            <td>{index + 1}</td>
+                            <td>{item.tgl_surat}</td>
+                            <td>{item.no_disposisi}</td>
+                            <td>{item.no_surat}</td>
+                            <td>{item.perihal}</td>
+                            <td>{item.satfung}</td>
+                            <td>{item.tgl_disposisi}</td>
+                            <td>{item.type_disposisi}</td>
+                            <td>
+                              <Link href='' className="btn btn-addtoprint"><FontAwesomeIcon icon={faPrint} /></Link>
+                            </td>
+                            <td>
+                              <button className="btn btn-sm btn-editdisposisi col-md-12" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => handleEditData(item.id)}>
+                                Edit
+                              </button>
+                              <button
+                                className="btn btn-sm btn-deletedisposisi col-md-12 mt-2"
+                                onClick={() => handleDeleteData(item.id)}
+                              >
+                                Delete
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

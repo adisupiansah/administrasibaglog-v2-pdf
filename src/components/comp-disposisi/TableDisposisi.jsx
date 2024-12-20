@@ -8,6 +8,7 @@ import EditDisposisi from "./EditDisposisi";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPrint } from "@fortawesome/free-solid-svg-icons";
+import GeneratePDF from "./GeneratePDF";
 
 
 
@@ -213,7 +214,7 @@ const TableDisposisi = () => {
                             <td>{item.tgl_disposisi}</td>
                             <td>{item.type_disposisi}</td>
                             <td>
-                              <Link href='' className="btn btn-addtoprint"><FontAwesomeIcon icon={faPrint} /></Link>
+                             <GeneratePDF id={item.id} />
                             </td>
                             <td>
                               <button className="btn btn-sm btn-editdisposisi col-md-12" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => handleEditData(item.id)}>

@@ -19,8 +19,8 @@ const geistMono = localFont({
 
 export const metadata = {
   // LOGAD (LOGISTIK ADMINISTRASI)
-  title: "LOGAD RESKARIMUN",
-  description: "LOGAD - LOGISTIK ADMINISTRASI POLRES KARIMUN",
+  title: "SILOGAD RESKARIMUN",
+  description: "SILOGAD - SISTEM INFORMASI LOGISTIK DAN ADMINISTRASI RESKARIMUN",
 };
 
 export default function RootLayout({ children }) {

@@ -132,29 +132,32 @@ body {
 span {
   color: var(--green-color);
 }
-.card .title-ndranmor{
-  color: var(--yellow-color);
-  font-size: 40px;
-  font-weight: 600;
-}
+
 .card-text-ndranmor{
   color: var(--white-color);
   font-size: 14px;
 }
 .card-text-ndranmor span {
-  color: var(--yellow-color);
-}
-.card .title-ndharwat{
   color: var(--blue-color);
-  font-size: 40px;
-  font-weight: 600;
 }
+
 .card-text-ndharwat{
   color: var(--white-color);
   font-size: 14px;
 }
 .card-text-ndharwat span {
+  color: var(--yellow-color);
+}
+
+.card-count-disposisi span {
   color: var(--blue-color);
+  font-size: 29px;
+  font-weight: 600;
+}
+.card-count-notadinas span {
+  color: var(--yellow-color);
+  font-size: 29px;
+  font-weight: 600;
 }
 
 /* components dashboard chart */

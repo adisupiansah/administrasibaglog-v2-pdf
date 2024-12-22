@@ -1,6 +1,8 @@
 import React from "react";
 import { jsPDF } from "jspdf";
-import templateImage from '../../app/img/template.jpg'
+import templateImage from "../../app/img/template.jpg";
+import { faPrint } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const GeneratePDF = ({ id }) => {
   // Fungsi untuk mendapatkan data disposisi berdasarkan ID
@@ -22,38 +24,35 @@ const GeneratePDF = ({ id }) => {
     try {
       // Ambil data berdasarkan ID
       const contohData = await getDataById(id);
-  
+
       // Buat dokumen PDF
       const doc = new jsPDF("p", "mm", "a4");
-  
+      // Atur font menjadi Helvetica
+      doc.setFont("times"); // Mengatur font ke Helvetica
+      doc.setFontSize(12); // Mengatur ukuran font
+
       // Tambahkan gambar template sebagai latar belakang
       const img = new Image();
       img.src = templateImage.src; // Gunakan properti src dari object templateImage
       img.onload = () => {
         doc.addImage(img, "JPEG", 0, 0, 210, 297); // Gambar template memenuhi ukuran A4 (210x297 mm)
-  
-        // ===== Lembar Disposisi =====
-        doc.setFontSize(14);
-        doc.text("LEMBAR DISPOSISI", 85, 40);
-  
-        // ===== Tabel Kiri =====
-        doc.setFontSize(12);
-        doc.text("SATFUNG :", 15, 65);
-        doc.text(contohData.satfung || "-", 40, 65); // Data dinamis
-  
-        doc.text("SURAT DARI :", 15, 72);
-        doc.text(contohData.satfung || "-", 40, 72); // Data dinamis
-  
-        doc.text("NOMOR SURAT :", 15, 79);
-        doc.text(contohData.no_surat || "-", 40, 79); // Data dinamis
-  
-        doc.text("TANGGAL SURAT :", 15, 86);
-        doc.text(contohData.tgl_surat || "-", 40, 86); // Data dinamis
-  
-        doc.text("PERIHAL :", 15, 93);
-        const perihalText = doc.splitTextToSize(contohData.perihal || "-", 150); // Pecah teks panjang
-        doc.text(perihalText, 40, 93); // Data dinamis multi-line
-  
+
+        //  no disposisi dan tanggal disposisi di atas table
+        doc.setFontSize(11.5);
+        doc.text(contohData.no_disposisi || "-", 35, 52.7); // Data dinamis
+        doc.text(contohData.tgl_disposisi || "-", 133, 52.7); // Data dinamis
+
+        const satfungText = doc.splitTextToSize(contohData.satfung || "-", 66);
+        doc.text(satfungText, 40, 72.8);
+
+        const nosurattext = doc.splitTextToSize(contohData.no_surat || "-", 66 ); 
+        doc.text(nosurattext, 40, 87.4); 
+
+        doc.text(contohData.tgl_surat || "-", 40, 102); // Data dinamis // 40 lebar kiri 87 atas bawah
+
+        const perihalText = doc.splitTextToSize(contohData.perihal || "-", 68); // Pecah teks panjang
+        doc.text(perihalText, 40, 111.5); // Data dinamis multi-line
+
         // Membuka di tab baru
         const pdfBlobURL = doc.output("bloburl"); // Membuat blob URL
         window.open(pdfBlobURL, "_blank"); // Membuka di tab baru
@@ -62,12 +61,10 @@ const GeneratePDF = ({ id }) => {
       console.error("Error saat membuat PDF:", error);
     }
   };
-  
-  
 
   return (
     <button className="btn btn-primary" onClick={hasilPDF}>
-      Print
+      <FontAwesomeIcon icon={faPrint} />
     </button>
   );
 };

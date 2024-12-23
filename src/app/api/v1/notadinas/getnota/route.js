@@ -3,7 +3,9 @@ import prisma from "@/libs/prisma";
 export async function GET (request) {
     try {
         // ambil semua data dari notadinas
-        const notadinas = await prisma.notadinas.findMany();
+        const notadinas = await prisma.notadinas.findMany({
+            orderBy: {id: "desc"},
+        });
         return new Response(JSON.stringify(notadinas), {
             status: 200,
             headers: {"Content-Type": "application/json"},

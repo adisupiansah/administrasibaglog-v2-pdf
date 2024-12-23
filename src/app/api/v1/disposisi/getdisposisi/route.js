@@ -24,7 +24,9 @@ export async function GET(request) {
             });
         } else {
             // Jika tidak ada ID, ambil semua data
-            const disposisi = await prisma.disposisi.findMany();
+            const disposisi = await prisma.disposisi.findMany({
+                orderBy: { id: "desc" },
+            });
             return new Response(JSON.stringify(disposisi), {
                 status: 200,
                 headers: { "Content-Type": "application/json" },

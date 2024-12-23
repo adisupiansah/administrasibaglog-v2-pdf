@@ -8,6 +8,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Swal from "sweetalert2";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import moment from "moment-timezone";
 
 const TablesNotadinas = () => {
 
@@ -226,14 +227,19 @@ const TablesNotadinas = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {data.map((item, index) => (
-                          <tr key={item.id}>
+                        {data.map((item, index) => {
+                          // konversi waktu dari UTC ke waktu Jakarta
+                          const UTCwaktu = new Date(item.tgl_input)
+                          const waktuJakarta = moment(UTCwaktu).tz('Asia/Jakarta').format('DD-MM-YYYY - HH:mm:ss')
+
+                          return (
+                            <tr key={item.id}>
                             <td>{index + 1}</td>
                             <td>{item.tgl_surat}</td>
                             <td>{item.no_surat}</td>
                             <td>{item.kepada}</td>
                             <td>{item.perihal}</td>
-                            <td>{item.tgl_input}</td>
+                            <td>{waktuJakarta}</td>
                             <td>
                               <Link href={item.notadinas_pdf} className='btn btn-addtopdf' target='_blank'><FontAwesomeIcon icon={faEye}/></Link>
                             </td>
@@ -245,7 +251,8 @@ const TablesNotadinas = () => {
                               <button className='btn btn-sm action-delete col-sm-12 mt-2' onClick={() => handleDeleteData(item.id)}>Delete</button> 
                             </td>
                           </tr>
-                        ))}
+                          )
+                        })}
                       </tbody>
                     </table>
                   )}

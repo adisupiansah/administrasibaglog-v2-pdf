@@ -6,10 +6,8 @@ import { createRoot } from "react-dom/client";
 import Swal from "sweetalert2";
 import EditDisposisi from "./EditDisposisi";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPrint } from "@fortawesome/free-solid-svg-icons";
 import GeneratePDF from "./GeneratePDF";
-
+import moment from "moment-timezone";
 
 
 const TableDisposisi = () => {
@@ -203,15 +201,20 @@ const TableDisposisi = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {data.map((item, index) => (
-                          <tr key={item.id}>
+                        {data.map((item, index) => {
+                          // Konversi waktu UTC ke waktu Jakarta
+                          const utcDate = new Date(item.tgl_disposisi);
+                          const waktuJakarta = moment(utcDate).tz('Asia/Jakarta').format( 'DD-MM-YYYY - HH:mm:ss');
+                          
+                          return (
+                            <tr key={item.id}>
                             <td>{index + 1}</td>
                             <td>{item.tgl_surat}</td>
                             <td>{item.no_disposisi}</td>
                             <td>{item.no_surat}</td>
                             <td>{item.perihal}</td>
                             <td>{item.satfung}</td>
-                            <td>{item.tgl_disposisi}</td>
+                            <td>{waktuJakarta}</td>
                             <td>{item.type_disposisi}</td>
                             <td>
                              <GeneratePDF id={item.id} />
@@ -228,7 +231,8 @@ const TableDisposisi = () => {
                               </button>
                             </td>
                           </tr>
-                        ))}
+                          )
+                        })}
                       </tbody>
                     </table>
                   )}

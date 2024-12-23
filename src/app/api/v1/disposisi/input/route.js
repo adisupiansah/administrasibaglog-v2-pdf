@@ -1,5 +1,6 @@
 import prisma from "@/libs/prisma";
 
+
 export async function POST (request) {
     try {
         const body = await request.json();
@@ -22,7 +23,9 @@ export async function POST (request) {
                 { status: 400 }
             )
         }
-
+   
+       
+ 
         // buat data di database
         const Disposisi = await prisma.disposisi.create({
             data: {
@@ -31,7 +34,7 @@ export async function POST (request) {
                 no_surat,
                 perihal,
                 satfung,
-                type_disposisi
+                type_disposisi,
             }
         })
 

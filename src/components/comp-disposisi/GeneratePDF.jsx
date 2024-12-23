@@ -3,6 +3,7 @@ import { jsPDF } from "jspdf";
 import templateImage from "../../app/img/template.jpg";
 import { faPrint } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import moment from "moment-timezone";
 
 const GeneratePDF = ({ id }) => {
   // Fungsi untuk mendapatkan data disposisi berdasarkan ID
@@ -40,7 +41,9 @@ const GeneratePDF = ({ id }) => {
         //  no disposisi dan tanggal disposisi di atas table
         doc.setFontSize(11.5);
         doc.text(contohData.no_disposisi || "-", 35, 52.7); // Data dinamis
-        doc.text(contohData.tgl_disposisi || "-", 133, 52.7); // Data dinamis
+        // conversi waktu UTC ke Jakkarta
+        const waktuJakarta = moment.utc(contohData.tgl_disposisi).tz("Asia/Jakarta").format("DD-MM-YYYY - HH:mm:ss");
+        doc.text(waktuJakarta || "-", 133, 52.7); // Data dinamis
 
         const satfungText = doc.splitTextToSize(contohData.satfung || "-", 66);
         doc.text(satfungText, 40, 72.8);

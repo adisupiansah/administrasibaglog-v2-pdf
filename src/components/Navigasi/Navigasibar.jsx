@@ -14,27 +14,27 @@ const Navigasibar = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (pathname === "/") {
+    if (pathname === "/admin") {
       setActiveMenu("Dashboard");
       setActiveSubMenu(null);
-    } else if (pathname.startsWith("/notadinas")) {
+    } else if (pathname.startsWith("/admin/notadinas")) {
       setActiveMenu("Nota Dinas");
 
-      if (pathname === "/notadinas") {
+      if (pathname === "/admin/notadinas") {
         setActiveSubMenu("Nota keluar");
-      } else if (pathname === "/notadinas/input") {
+      } else if (pathname === "/admin/notadinas/input") {
         setActiveSubMenu("Input");
-      } else if (pathname === "/notadinas/pengajuan") {
+      } else if (pathname === "/admin/notadinas/pengajuan") {
         setActiveSubMenu("Pengajuan");
-      } else if (pathname === "/notadinas/arsip") {
+      } else if (pathname === "/admin/notadinas/arsip") {
         setActiveSubMenu("Arsip");
       }
-    } else if (pathname.startsWith("/disposisi")) {
+    } else if (pathname.startsWith("/admin/disposisi")) {
       setActiveMenu("Disposisi");
 
-      if (pathname === "/disposisi") {
+      if (pathname === "/admin/disposisi") {
         setActiveSubMenu("Disposisi masuk");
-      } else if (pathname === "/disposisi/input") {
+      } else if (pathname === "/admin/disposisi/input") {
         setActiveSubMenu("Input disposisi");
       }
     }
@@ -74,7 +74,7 @@ const Navigasibar = () => {
       <nav className="navbar-nav shadow-sm">
         <div className="container">
           <div className="d-flex justify-content-center align-items-center gap-3">
-            <Link href="/" className={`pointer ${menuActiveClass("Dashboard")}`}>
+            <Link href="/admin" className={`pointer ${menuActiveClass("Dashboard")}`}>
               Dashboard
             </Link>
             <div className="dropdown">
@@ -87,28 +87,28 @@ const Navigasibar = () => {
               {isDropdownOpen && (
                 <div className="dropdown-menu show mt-3">
                   <Link
-                    href="/notadinas"
+                    href="/admin/notadinas"
                     className={`dropdown-item ${submenuActiveClass("Nota keluar")}`}
                     onClick={handleSubMenuClick}
                   >
                     Nota keluar
                   </Link>
                   <Link
-                    href="/notadinas/input"
+                    href="/admin/notadinas/input"
                     className={`dropdown-item ${submenuActiveClass("Input")}`}
                     onClick={handleSubMenuClick}
                   >
                     Input
                   </Link>
                   <Link
-                    href="/notadinas/pengajuan"
+                    href="/admin/notadinas/pengajuan"
                     className={`dropdown-item ${submenuActiveClass("Pengajuan")}`}
                     onClick={handleSubMenuClick}
                   >
                     Pengajuan
                   </Link>
                   <Link
-                    href="/notadinas/arsip"
+                    href="/admin/notadinas/arsip"
                     className={`dropdown-item ${submenuActiveClass("Arsip")}`}
                     onClick={handleSubMenuClick}
                   >
@@ -127,14 +127,14 @@ const Navigasibar = () => {
               {isDropdownOpenDisposisi && (
                 <div className="dropdown-menu show mt-3">
                   <Link
-                    href="/disposisi"
+                    href="/admin/disposisi"
                     className={`dropdown-item ${submenuActiveClass("Disposisi masuk")}`}
                     onClick={handleSubMenuClick}
                   >
                     Disposisi masuk
                   </Link>
                   <Link
-                    href="/disposisi/input"
+                    href="/admin/disposisi/input"
                     className={`dropdown-item ${submenuActiveClass("Input disposisi")}`}
                     onClick={handleSubMenuClick}
                   >

@@ -1,9 +1,12 @@
+import FormRequest from "@/components/component-client/comp-form/FormRequest";
+import Judul from "@/components/component-client/comp-judul/Judul";
 
 export default function Home() {
  
   return (
-    <div>
-      <h1 className="d-flex justify-content-center align-items-center vh-100 text-light">WEB CLIENT</h1>
+    <div className="kolo justify-content-center align-items-center vh-100 d-flex flex-column" >
+      <Judul/>
+      <FormRequest/>
     </div>
   );
 }

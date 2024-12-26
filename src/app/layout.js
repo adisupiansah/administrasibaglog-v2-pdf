@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import '@/libs/fontawesome';
-import "./css/style.css";
+import "./globals.css";
 import Navbar from "@/components/component-client/comp-navigasi/Navbar";
 import { Roboto } from 'next/font/google';
 

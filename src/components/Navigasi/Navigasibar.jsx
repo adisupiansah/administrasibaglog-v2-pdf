@@ -13,6 +13,8 @@ const Navigasibar = () => {
 
   const pathname = usePathname();
 
+  if(pathname === '/admin/auth') return null
+
   useEffect(() => {
     if (pathname === "/admin") {
       setActiveMenu("Dashboard");
@@ -59,7 +61,7 @@ const Navigasibar = () => {
   const submenuActiveClass = (submenu) => (activeSubMenu === submenu ? "active" : "");
 
   return (
-    <div>
+    <div className="fixed-top">
       <nav className="navbar">
         <div className="container">
           <a className="navbar-brand d-flex justify-content-center align-items-center" href="/">

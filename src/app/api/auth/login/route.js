@@ -20,11 +20,11 @@ export async function POST(request) {
         // Cari user di database
         const user = await prisma.user.findUnique({
             where: { username },
-        })
+        });
 
         // Jika user tidak ditemukan
         if (!user) {
-            return new Response(JSON.stringify({ message: 'Username tidak ditemukan' }), {
+            return new Response(JSON.stringify({ message: 'Username Salah' }), {
                 status: 404,
                 headers: { 'Content-Type': 'application/json' },
             });
@@ -38,17 +38,17 @@ export async function POST(request) {
             });
         }
 
-        // Jika login berhasil
+        // Jika user ditemukan dan password benar
         return new Response(JSON.stringify({ message: 'Login berhasil' }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' },
         });
 
     } catch (error) {
-        console.error('Terjadi kesalahan server:', error);
-        return new Response(JSON.stringify({ 
-            message: 'Terjadi kesalahan saat login', 
-            error: error?.message || 'Kesalahan tidak diketahui' 
+        console.error('Terjadi kesalahan server:', error.message);
+        return new Response(JSON.stringify({
+            message: 'Terjadi kesalahan saat login',
+            error: error?.message || 'Kesalahan tidak diketahui'
         }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' },

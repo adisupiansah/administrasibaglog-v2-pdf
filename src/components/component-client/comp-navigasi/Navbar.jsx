@@ -10,7 +10,7 @@ const Navbar = () => {
   const pathname = usePathname()
 
   if (pathname === '/auth') return null
-
+  
   useEffect(() => {
     require("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
@@ -20,7 +20,7 @@ const Navbar = () => {
       <nav className="navbar navbar-expand-lg fixed-top">
         <div className="container">
           <Link className="navbar-brand d-flex" href="/">
-            <Image  alt="logo-logistik" src={logoBaglog} width={56} height={56} />
+            <Image  alt="logo-logistik" src={logoBaglog} width={50} height={56} />
             <div className="d-flex flex-column mx-2">
               <span>BAGLOG POLRES</span>
               <span>KARIMUN</span>
@@ -40,12 +40,12 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link" aria-current="page" href="/">
+                <Link className="nav-link" aria-current="page" href='/'>
                   Pengajuan
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="#">
+                <Link className="nav-link" href="/viewharwat">
                   Pantau Harwat
                 </Link>
               </li>

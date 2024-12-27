@@ -49,6 +49,6 @@ model notadinas {
 
 model user {
   id       Int    @id @default(autoincrement())
-  username String @db.VarChar(100)
   password String @db.VarChar(200)
+  username String @unique(map: "username") @db.VarChar(200)
 }

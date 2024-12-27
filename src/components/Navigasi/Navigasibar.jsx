@@ -66,7 +66,7 @@ const Navigasibar = () => {
         <div className="container">
           <a className="navbar-brand d-flex justify-content-center align-items-center" href="/">
             <Image src={logo} alt="logo" width={56} height={65} />
-            <div className="d-flex flex-column">
+            <div className="d-flex flex-column mx-2">
               <span>BAGIAN LOGISTIK</span>
               <span>POLRES KARIMUN</span>
             </div>

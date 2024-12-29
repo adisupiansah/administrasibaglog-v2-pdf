@@ -1,11 +1,11 @@
 import "bootstrap/dist/css/bootstrap.css";
-import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
-import '@fortawesome/fontawesome-svg-core/styles.css';
-import '@/libs/fontawesome';
+import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import "@/libs/fontawesome";
 import "./globals.css";
 import Navbar from "@/components/component-client/comp-navigasi/Navbar";
-import { Roboto } from 'next/font/google';
-
+import { Roboto } from "next/font/google";
+import { UserProvider } from "@/context/UserContext";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -19,13 +19,14 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-
   return (
     <html lang="en" className={roboto.className}>
-      <body>
-        <Navbar/>
-      </body>
+      <UserProvider>
+        <body>
+          <Navbar />
+        </body>
         {children}
+      </UserProvider>
     </html>
   );
 }

@@ -4,6 +4,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import '@/libs/fontawesome';
 import "@/app/css/admin.css";
 import Navigasibar from "@/components/Navigasi/Navigasibar";
+import CekClientLogin from "@/libs/CekClientLogin";
 
 
 export const metadata = {
@@ -17,6 +18,7 @@ export default function AdminLayout({ children }) {
   return (
     <>
       <div className='body'>
+        <CekClientLogin/>
         <Navigasibar/>
       </div>
         {children}

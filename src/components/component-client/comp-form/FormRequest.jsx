@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import 'animate.css'
 
 const FormRequest = () => {
   const [data, setData] = useState({
@@ -108,7 +109,7 @@ const FormRequest = () => {
 
           {/* Form ditampilkan hanya jika isFormVisible true */}
           {isFormVisible && (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="animate__animated animate__zoomIn">
               <label>Nama</label>
               <input
                 type="text"

@@ -83,6 +83,7 @@
   margin-top: 0; /* Menghilangkan jarak vertikal */
   background-color: var(--black-color);
   border: none;
+  --animate-duration: 0.3s;
 }
 .navbar-nav .dropdown-item {
   color: var(--white-color);
@@ -674,4 +675,56 @@ span {
   background-color: var(--black-color);
   color: var(--white-color);
   border: 1px solid var(--green-color);
+}
+
+
+/* COMPONENT BUTTON USER DROPDOWN */
+.open-user{
+  position: absolute;
+  top: 70%; 
+  right: 50px;
+  transform: none; 
+  margin-top: 0;
+  background-color: var(--background);
+  border: rgba(217, 223, 198, 0.1) 1px solid;
+  border-radius: 7px;
+  --animate-duration: 0.3s;
+}
+.user-profile {
+  padding: 10px;
+}
+.user-profile .icon-user{
+  background: #D9DFC6;
+  padding: 5px 5px 0 5px;
+  border-radius: 5px;
+  font-size: 33px;
+  color: var(--black-color);
+}
+.user-profile h1{
+  font-size: 17px;
+}
+ .garis-pembatas{
+  border-bottom: 1px solid var(--grey-color);
+}
+.user-logout{
+  padding: 10px;
+}
+
+.user-logout .btn-logout:hover{
+  background: #d9dfc6;
+  color: var(--red-color);
+  transition: ease-in 0.2s;
+  border-radius: 7px;
+  padding: 5px;
+}
+.btn-user{
+  background: rgba(217, 223, 198, 0.1);
+  color: var(--black-color);
+  padding: 5px 7px;
+  border-radius: 7px;
+  border: 1px solid rgba(217, 223, 198, 0.1);
+}
+.btn-user .icon{
+  font-size: 25px;
+  color: var(--white-color);
 }

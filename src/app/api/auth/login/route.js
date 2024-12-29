@@ -1,57 +1,63 @@
 import prisma from "@/libs/prisma";
+import { NextResponse } from "next/server";
 
 export async function POST(request) {
-    try {
-        // Menerima dan validasi body
-        const body = await request.json();
-        console.log('Body received:', body);
-        
-        if (!body || typeof body !== 'object' || !body.username || !body.password) {
-            return new Response(JSON.stringify({ 
-                message: 'Bad Request: Body tidak valid' 
-            }), {
-                status: 400,
-                headers: { 'Content-Type': 'application/json' },
-            });
-        }
+  try {
+    // Menerima dan validasi body
+    const body = await request.json();
 
-        const { username, password } = body;
-
-        // Cari user di database
-        const user = await prisma.user.findUnique({
-            where: { username },
-        });
-
-        // Jika user tidak ditemukan
-        if (!user) {
-            return new Response(JSON.stringify({ message: 'Username Salah' }), {
-                status: 404,
-                headers: { 'Content-Type': 'application/json' },
-            });
-        }
-
-        // Jika password salah
-        if (user.password !== password) {
-            return new Response(JSON.stringify({ message: 'Password salah' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' },
-            });
-        }
-
-        // Jika user ditemukan dan password benar
-        return new Response(JSON.stringify({ message: 'Login berhasil' }), {
-            status: 200,
-            headers: { 'Content-Type': 'application/json' },
-        });
-
-    } catch (error) {
-        console.error('Terjadi kesalahan server:', error.message);
-        return new Response(JSON.stringify({
-            message: 'Terjadi kesalahan saat login',
-            error: error?.message || 'Kesalahan tidak diketahui'
-        }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' },
-        });
+    if (!body || typeof body !== "object" || !body.username || !body.password) {
+      return NextResponse.json(
+        {
+          message: "Bad Request: Body tidak valid",
+        },
+        { status: 400 }
+      );
     }
+
+    const { username, password } = body;
+
+    // Cari user di database
+    const user = await prisma.user.findUnique({
+      where: { username },
+    });
+
+    // Jika user tidak ditemukan
+    if (!user) {
+      return NextResponse.json({ message: "Username Salah" }, { status: 404 });
+    }
+
+    // Jika password salah
+    if (user.password !== password) {
+      return NextResponse.json({ message: "Password salah" }, { status: 401 });
+    }
+
+    // Jika login berhasil, kembalikan username dan set cookie
+    const response = NextResponse.json(
+      {
+        message: "Login berhasil",
+        username: user.username, // Kirim username ke frontend
+      },
+      { status: 200 }
+    );
+
+    response.cookies.set("isLoggedIn", "true", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 3600, // 1 jam
+      path: "/",
+    });
+
+    return response;
+  } catch (error) {
+    console.error("Terjadi kesalahan server:", error.message);
+    return NextResponse.json(
+      {
+        message: "Terjadi kesalahan saat login",
+        error: error?.message || "Kesalahan tidak diketahui",
+      },
+      { status: 500 }
+    );
+  }
 }

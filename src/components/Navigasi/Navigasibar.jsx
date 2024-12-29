@@ -1,9 +1,14 @@
 "use client";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { faUserTie } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useHooksLogout } from "@/libs/logut";
+import { useUser } from "@/context/UserContext";
 import Image from "next/image";
 import logo from "@/app/img/logoLogistik.png";
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import 'animate.css'
 
 const Navigasibar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -11,9 +16,25 @@ const Navigasibar = () => {
   const [activeMenu, setActiveMenu] = useState("Dashboard");
   const [activeSubMenu, setActiveSubMenu] = useState(null);
 
+  // state untuk buka dropdown user
+  const [isDropdownOpenUser, setIsDropdownOpenUser] = useState(false);
+
+  const { adminName, setAdminName } = useUser();
+
   const pathname = usePathname();
 
+  // Logout
+  const {handleLogout} = useHooksLogout()
+
   if(pathname === '/admin/auth') return null
+
+  // useeffect untuk menangkap username
+useEffect(() => {
+    const storedUsername = sessionStorage.getItem("username");
+    if (storedUsername) {
+      setAdminName(storedUsername);
+    }
+  }, [setAdminName]);
 
   useEffect(() => {
     if (pathname === "/admin") {
@@ -52,6 +73,12 @@ const Navigasibar = () => {
     setIsDropdownOpen(false);
   };
 
+  const toggleDropdownUser = () => {
+    setIsDropdownOpenUser(!isDropdownOpenUser);
+    setIsDropdownOpen(false);
+
+  };
+
   const handleSubMenuClick = () => {
     setIsDropdownOpen(false);
     setIsDropdownOpenDisposisi(false);
@@ -59,6 +86,7 @@ const Navigasibar = () => {
 
   const menuActiveClass = (menu) => (activeMenu === menu ? "active" : "");
   const submenuActiveClass = (submenu) => (activeSubMenu === submenu ? "active" : "");
+  
 
   return (
     <div className="fixed-top">
@@ -71,6 +99,27 @@ const Navigasibar = () => {
               <span>POLRES KARIMUN</span>
             </div>
           </a>
+
+          <div className="d-flex justify-content-end">
+            <button className="btn-user d-flex justify-content-center align-items-center" onClick={toggleDropdownUser}>
+              <FontAwesomeIcon icon={faUserTie} className="icon"/>
+            </button>
+            {isDropdownOpenUser && (
+              <div className="shadow-sm open-user animate__animated animate__zoomIn ">
+                <div className="d-flex justify-content-center align-items-center user-profile">
+                    <FontAwesomeIcon icon={faUserTie} className="icon-user"/>
+                    <h1 className="mx-2">{adminName || 'Guest'}</h1>
+                </div>
+
+                <div className="garis-pembatas"></div>
+
+                <div className="user-logout">
+                    <button className="btn-logout col-md-12" onClick={handleLogout}>Logout</button> 
+                </div>
+              </div>
+            )}
+          </div>
+
         </div>
       </nav>
       <nav className="navbar-nav shadow-sm">
@@ -87,7 +136,7 @@ const Navigasibar = () => {
                 {activeMenu === "Nota Dinas" ? activeSubMenu : "Nota Dinas"}
               </div>
               {isDropdownOpen && (
-                <div className="dropdown-menu show mt-3">
+                <div className="dropdown-menu show mt-3 animate__animated animate__zoomIn">
                   <Link
                     href="/admin/notadinas"
                     className={`dropdown-item ${submenuActiveClass("Nota keluar")}`}
@@ -127,7 +176,7 @@ const Navigasibar = () => {
                 {activeMenu === "Disposisi" ? activeSubMenu : "Disposisi"}
               </div>
               {isDropdownOpenDisposisi && (
-                <div className="dropdown-menu show mt-3">
+                <div className="dropdown-menu show mt-3 animate__animated animate__zoomIn">
                   <Link
                     href="/admin/disposisi"
                     className={`dropdown-item ${submenuActiveClass("Disposisi masuk")}`}

@@ -1,26 +1,31 @@
 "use client";
 import React, { useEffect } from "react";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Link from "next/link";
 import Image from "next/image";
 import logoBaglog from "@/app/img/logoLogistik.png";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
-  if (pathname === '/auth') return null
-  
-  useEffect(() => {
-    require("bootstrap/dist/js/bootstrap.bundle.min.js");
-  }, []);
+  if (pathname === "/auth") return null;
+
+
+
+  // Fungsi untuk menambahkan kelas "active"
+  const isActive = (url) => (pathname === url ? "active-navbar-client" : "");
 
   return (
     <div>
       <nav className="navbar navbar-expand-lg fixed-top">
         <div className="container">
           <Link className="navbar-brand d-flex" href="/">
-            <Image  alt="logo-logistik" src={logoBaglog} width={50} height={56} />
+            <Image
+              alt="logo-logistik"
+              src={logoBaglog}
+              width={50}
+              height={56}
+            />
             <div className="d-flex flex-column mx-2">
               <span>BAGLOG POLRES</span>
               <span>KARIMUN</span>
@@ -40,12 +45,19 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link" aria-current="page" href='/'>
+                <Link
+                  className={`nav-link ${isActive("/")}`}
+                  aria-current="page"
+                  href="/"
+                >
                   Pengajuan
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/viewharwat">
+                <Link
+                  className={`nav-link ${isActive("/viewharwat")}`}
+                  href="/viewharwat"
+                >
                   Pantau Harwat
                 </Link>
               </li>

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { createRoot } from "react-dom/client";
 import Swal from "sweetalert2";
 import EditDisposisi from "./EditDisposisi";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import GeneratePDF from "./GeneratePDF";
 import moment from "moment-timezone";
 

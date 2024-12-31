@@ -681,8 +681,8 @@ span {
 /* COMPONENT BUTTON USER DROPDOWN */
 .open-user{
   position: absolute;
-  top: 70%; 
-  right: 50px;
+  top: 73%; 
+  left: auto;
   transform: none; 
   margin-top: 0;
   background-color: var(--background);
@@ -690,6 +690,7 @@ span {
   border-radius: 7px;
   --animate-duration: 0.3s;
 }
+
 .user-profile {
   padding: 10px;
 }

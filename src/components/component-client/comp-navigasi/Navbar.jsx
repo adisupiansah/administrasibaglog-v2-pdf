@@ -8,8 +8,7 @@ import { usePathname } from "next/navigation";
 const Navbar = () => {
   const pathname = usePathname();
 
-  if (pathname === "/auth") return null;
-
+  if (pathname === "/auth" || pathname === '/auth/register') return null;
 
 
   // Fungsi untuk menambahkan kelas "active"

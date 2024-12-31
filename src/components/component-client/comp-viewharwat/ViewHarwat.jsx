@@ -1,6 +1,9 @@
 import React from 'react'
 
 const ViewHarwat = () => {
+    
+
+
   return (
     <div className='viewharwat'>
         <div className="container">

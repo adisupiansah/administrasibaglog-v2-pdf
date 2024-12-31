@@ -1,8 +1,7 @@
 import React from "react";
 import { jsPDF } from "jspdf";
 import templateImage from "../../app/img/template.jpg";
-import { faPrint } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaPrint } from "react-icons/fa6";
 import moment from "moment-timezone";
 
 const GeneratePDF = ({ id }) => {
@@ -67,7 +66,7 @@ const GeneratePDF = ({ id }) => {
 
   return (
     <button className="btn btn-primary" onClick={hasilPDF}>
-      <FontAwesomeIcon icon={faPrint} />
+      <FaPrint/>
     </button>
   );
 };

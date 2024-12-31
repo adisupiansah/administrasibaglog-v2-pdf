@@ -1,9 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { faUserTie } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaUserNurse } from "react-icons/fa";
 import { useHooksLogout } from "@/libs/logut";
+import { FaUser } from "react-icons/fa";
 import { useUser } from "@/context/UserContext";
 import Image from "next/image";
 import logo from "@/app/img/logoLogistik.png";
@@ -102,12 +102,12 @@ useEffect(() => {
 
           <div className="d-flex justify-content-end">
             <button className="btn-user d-flex justify-content-center align-items-center" onClick={toggleDropdownUser}>
-              <FontAwesomeIcon icon={faUserTie} className="icon"/>
+              <FaUserNurse className="icon"/>
             </button>
             {isDropdownOpenUser && (
               <div className="shadow-sm open-user animate__animated animate__zoomIn ">
                 <div className="d-flex justify-content-center align-items-center user-profile">
-                    <FontAwesomeIcon icon={faUserTie} className="icon-user"/>
+                    <FaUser className="icon-user"/>
                     <h1 className="mx-2">{adminName || 'Guest'}</h1>
                 </div>
 

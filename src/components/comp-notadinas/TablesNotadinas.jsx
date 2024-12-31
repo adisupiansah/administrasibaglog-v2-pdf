@@ -6,8 +6,7 @@ import { createRoot } from "react-dom/client";
 import EditNotaDinas from "./EditNotaDinas";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Swal from "sweetalert2";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaEye } from "react-icons/fa";
 import moment from "moment-timezone";
 
 const TablesNotadinas = () => {
@@ -241,7 +240,7 @@ const TablesNotadinas = () => {
                             <td>{item.perihal}</td>
                             <td>{waktuJakarta}</td>
                             <td>
-                              <Link href={item.notadinas_pdf} className='btn btn-addtopdf' target='_blank'><FontAwesomeIcon icon={faEye}/></Link>
+                              <Link href={item.notadinas_pdf} className='btn btn-addtopdf' target='_blank'><FaEye/></Link>
                             </td>
                             <td className=''>
                               <button 

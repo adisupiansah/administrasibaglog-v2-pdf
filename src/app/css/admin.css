@@ -689,6 +689,7 @@ span {
   border: rgba(217, 223, 198, 0.1) 1px solid;
   border-radius: 7px;
   --animate-duration: 0.3s;
+  z-index: 1;
 }
 
 .user-profile {

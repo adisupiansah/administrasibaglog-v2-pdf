@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import { FaEye } from "react-icons/fa";
 import moment from "moment-timezone";
 
+
 const TablesNotadinas = () => {
 
   const [data, setData] = useState([])
@@ -160,6 +161,8 @@ const TablesNotadinas = () => {
   useEffect(() => {
     ambilData()
   }, []);
+
+  
 
   // useEffect modal
   useEffect(() => {

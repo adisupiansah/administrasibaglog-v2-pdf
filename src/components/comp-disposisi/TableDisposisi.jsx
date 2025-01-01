@@ -16,7 +16,7 @@ const TableDisposisi = () => {
 
   const ButtonSurat = () => {
     return (
-      <Link href="/disposisi/input" className="btn buat-disposisi">
+      <Link href="/admin/disposisi/input" className="btn buat-disposisi">
         input disposisi
       </Link>
     );

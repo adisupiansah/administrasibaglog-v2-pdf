@@ -1,6 +1,6 @@
 import React from "react";
-import { jsPDF } from "jspdf";
-import templateImage from "../../app/img/template.jpg";
+import  jsPDF  from "jspdf";
+import templateImage from "@/app/img/template.jpg";
 import { FaPrint } from "react-icons/fa6";
 import moment from "moment-timezone";
 

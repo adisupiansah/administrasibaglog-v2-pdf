@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 
 export async function GET() {
     const cookieStore = cookies(); // Gunakan cookies() dari next/headers
-    const isLoggedIn = cookieStore.get('isLoggedIn')?.value; // Ambil nilai cookie
+    const isLoggedIn = (await cookieStore).get('isLoggedIn')?.value; // Ambil nilai cookie
 
     if (isLoggedIn === 'true') {
         return new Response(

@@ -1,7 +1,4 @@
-import "bootstrap/dist/css/bootstrap.css";
-import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
-import '@fortawesome/fontawesome-svg-core/styles.css';
-import '@/libs/fontawesome';
+import "bootstrap/dist/css/bootstrap.css";;
 import "@/app/css/admin.css";
 import Navigasibar from "@/components/Navigasi/Navigasibar";
 import CekClientLogin from "@/libs/CekClientLogin";

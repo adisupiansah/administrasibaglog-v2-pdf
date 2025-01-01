@@ -64,7 +64,7 @@ const InputNotaDinas = () => {
           color: "#D9D9D9",
           background: "#212529",
         }).then(() => {
-          window.location.href = "/notadinas";
+          window.location.href = "/admin/notadinas";
         })
 
         // Reset form setelah berhasil menyimpan data

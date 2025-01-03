@@ -179,6 +179,7 @@ const TablesNotadinas = () => {
                     tableStyle={{ minWidth: '50rem' }}
                     rows={1}
                     responsiveLayout="scroll"
+                    className='DataTable'
                 
                   >
                     <Column
@@ -201,8 +202,8 @@ const TablesNotadinas = () => {
                       field="notadinas_pdf"
                       header="File"
                       body={(rowData) => (
-                        <Link href={rowData.notadinas_pdf} target="_blank">
-                          <FaEye />
+                        <Link href={rowData.notadinas_pdf} target="_blank" className='btn-addtopdf'>
+                          <FaEye className="icon-viewpdf"/>
                         </Link>
                       )}
                     />

@@ -3,7 +3,7 @@ import "@/app/css/admin.css";
 import Navigasibar from "@/components/Navigasi/Navigasibar";
 import CekClientLogin from "@/libs/CekClientLogin";
 import { PrimeReactProvider } from "primereact/api";
-import 'primereact/resources/primereact.css';
+import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/soho-dark/theme.css';
 
 export const metadata = {

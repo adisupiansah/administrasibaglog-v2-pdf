@@ -272,14 +272,12 @@ span {
 .datatables .btn-addtopdf{
   background-color: var(--blue-color);
   color: var(--white-color);
-  font-weight: 500;
-  font-size: 15px;
-  border-radius: 10px;
-  padding: 5px 7px 5px 7px;
-
 }
 .datatables .btn-addtopdf:hover{
   background-color: #0649b6;
+}
+.btn-addtopdf .icon-viewpdf{
+  font-size: 28px;
 }
 
 /* COMPONENET NOTA DINAS - CHART */
@@ -300,7 +298,7 @@ span {
   border-radius: 10px;
   background: var(--black-color);
 }
-.buat-surat{
+/* .buat-surat{
   background-color: var(--green-color);
   font-weight: 500;
   font-size: 15px;
@@ -325,7 +323,8 @@ span {
   background-color: var(--black-color);
   border: 1px solid var(--blue-color);
   color: var(--white-color);
-}
+} */
+
 
 /* COMPONENTS NOTA DINAS - INPUT NOTA DINAS */
 .input-notadinas{
@@ -527,8 +526,14 @@ span {
 .btn-addtoprint:hover{
   background-color: #47814c;
   color: var(--black-color);
- 
 }
+/* .btn-viewpdf{
+  background-color: var(--blue-color);
+  color: var(--white-color);
+  font-size: 25px;
+  font-weight: 500;
+}
+.btn */
 
 /* COMPONENTS DISPOSISI - INPUT DISPOSISI */
 .input-disposisi{

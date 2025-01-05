@@ -102,7 +102,7 @@ const PengajuanNotaDinas = () => {
           },
         ],
         topEnd: [tombolBack],
-        bottomEnd: ["paging", btnDelete],
+        bottomEnd: [btnDelete, 'paging'],
       },
       scrollX: true,
     });

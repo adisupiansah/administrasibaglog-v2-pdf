@@ -8,15 +8,14 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Swal from "sweetalert2";
 import { FaEye } from "react-icons/fa";
 import moment from "moment-timezone";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import { InputText } from "primereact/inputtext";
+import $ from "jquery";
+import "datatables.net"; // Inti DataTables
+import "datatables.net-bs5"; // Bootstrap 5 DataTables
 
 const TablesNotadinas = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true); // state untuk loading
   const [editData, setEditData] = useState(null);
-  const [globalFilter, setGlobalFilter] = useState("");
 
   const ambilData = async () => {
     try {
@@ -82,6 +81,35 @@ const TablesNotadinas = () => {
     });
   };
 
+  const InisialisasiTable = () => {
+    InitTable("#example", {
+      language: {
+        info: "Halaman _PAGE_ dari _PAGES_",
+        infoEmpty: "tidak ada catatan yang tersedia",
+        infoFiltered: "(difilter dari _MAX_ data)",
+        lengthMenu: "_MENU_ banyak halaman",
+        zeroRecords: "Data tidak ditemukan",
+      },
+      layout: {
+        topStart: [
+          {
+            search: {
+              placeholder: "Cari data",
+            },
+            pageLength: {
+              menu: [
+                [10, 25, 100, -1],
+                [10, 25, 100, "All"],
+              ],
+            },
+          },
+        ],
+        topEnd: null,
+        bottomEnd: ["paging"],
+      },
+      scrollX: true,
+    });
+  };
   const action = (rowData) => {
     return (
       <div>
@@ -111,7 +139,22 @@ const TablesNotadinas = () => {
     return waktuJakarta;
   };
 
+  const ViewPDF = (rowData) => {
+    return (
+      <Link href={rowData.notadinas_pdf} target="_blank" className="btn btn-addtopdf">
+        <FaEye />
+      </Link>
+    )
+  }
 
+  useEffect(() => {
+    if (!loading && data.length > 0) {
+      const table = InisialisasiTable();
+      if (table) {
+        table.destroy();
+      }
+    }
+  }, [loading, data]);
 
   // ambil data saat komponen dimuat
   useEffect(() => {
@@ -165,50 +208,43 @@ const TablesNotadinas = () => {
             <div className="col">
               <div className="card">
                 <div className="card-body">
-                  <InputText
-                    placeholder="Cari data"
-                    value={globalFilter}
-                    onChange={(e) => setGlobalFilter(e.target.value)}
-                  />
-                  <DataTable
-                    value={data}
-                    globalFilter={globalFilter}
-                    emptyMessage="Tidak ada data"
-                    loading={loading}
-                    paginator
-                    tableStyle={{ minWidth: '50rem' }}
-                    rows={1}
-                    responsiveLayout="scroll"
-                    className='DataTable'
-                
-                  >
-                    <Column
-                      field="id"
-                      header="No"
-                      sortable
-                      body={(rowData, options) => options.rowIndex + 1}
-                    />
-                    <Column field="tgl_surat" header="Tanggal Surat" sortable/>
-                    <Column field="no_surat" header="Nomor Surat" sortable/>
-                    <Column field="kepada" header="Kepada" sortable/>
-                    <Column field="perihal" header="Hal" sortable/>
-                    <Column
-                      field="tgl_input"
-                      header="Tanggal Input"
-                      body={WaktuJakarta}
-                      sortable
-                    />
-                    <Column
-                      field="notadinas_pdf"
-                      header="File"
-                      body={(rowData) => (
-                        <Link href={rowData.notadinas_pdf} target="_blank" className='btn-addtopdf'>
-                          <FaEye className="icon-viewpdf"/>
-                        </Link>
-                      )}
-                    />
-                    <Column field="action" header="Action" body={action} />
-                  </DataTable>
+                  {loading ? (
+                    <p>Loading...</p>
+                  ) : (
+                    <table
+                      className="table table-striped table-dark p-3"
+                      id="example"
+                    >
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Tanggal Surat</th>
+                          <th>Nomor Surat</th>
+                          <th>Kepada</th>
+                          <th>Hal</th>
+                          <th>Tanggal Input</th>
+                          <th>Type Notadinas</th>
+                          <th>File</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {data.map((item, index) => (
+                          <tr key={item.id}>
+                            <td>{index + 1}</td>
+                            <td>{item.tgl_surat}</td>
+                            <td>{item.no_surat}</td>
+                            <td>{item.kepada}</td>
+                            <td>{item.perihal}</td>
+                            <td>{WaktuJakarta(item)}</td>
+                            <td>{item.type_notadinas}</td>
+                            <td>{ViewPDF(item)}</td>
+                            <td>{action(item)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )}
                 </div>
               </div>
             </div>

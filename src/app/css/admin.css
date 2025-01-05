@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('/node_modules/datatables.net-dt/css/jquery.dataTables.css');
+
 
 /* fonts roboto google */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
@@ -715,7 +717,7 @@ span {
   border-bottom: 1px solid var(--grey-color);
 }
 .user-logout{
-  padding: 10px;
+  padding: 0 10px 10px 10px;
 }
 
 .user-logout .btn-logout:hover{
@@ -735,4 +737,48 @@ span {
 .btn-user .icon{
   font-size: 25px;
   color: var(--white-color);
+}
+
+.user-settings{
+  padding: 4px 10px 5px 10px;
+}
+.user-settings .btn-settings:hover{
+  background: #d9dfc6;
+  color: var(--red-color);
+  transition: ease-in 0.2s;
+  border-radius: 7px;
+  padding: 5px;
+}
+
+/* COMPONENT BUTTON USER DROPDOWN - SETTINGS */
+.settings-akun h3{
+  color: var(--grey-color);
+  font-weight: 600;
+  font-size: 20px;
+  transform: translate(-100%, -250%);
+}
+.settings-akun .card {
+  background: var(--black-color);
+}
+.settings-akun .icon-user{
+  font-size: 80px;
+  color: var(--grey-color);
+}
+.settings-akun .border-left{
+  border-left: 1px solid var(--grey-color);
+}
+.settings-akun .border-left form{
+  padding: 20px;
+}
+
+.button-editpw .btn{
+  background-color: var(--green-color);
+  border-radius: 5px;
+  color: var(--black-color);
+}
+.button-editpw .btn:hover{
+  background-color: var(--black-color);
+  border: 1px solid var(--green-color);
+  color: var(--white-color);
+  transition: ease-in 0.2s;
 }

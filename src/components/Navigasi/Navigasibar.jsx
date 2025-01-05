@@ -113,6 +113,9 @@ useEffect(() => {
 
                 <div className="garis-pembatas"></div>
 
+                <div className="user-settings col-md-12 d-flex justify-content-center align-items-center">
+                    <Link className="btn-settings col-md-12 text-center" href='/admin/account/settings'>settings</Link> 
+                </div>
                 <div className="user-logout">
                     <button className="btn-logout col-md-12" onClick={handleLogout}>Logout</button> 
                 </div>

@@ -5,45 +5,45 @@ import { createRoot } from "react-dom/client";
 import InitTable from "@/libs/datatables-config";
 
 const ArsipNotaDinas = () => {
-  // const BackToDashboard = () => {
-  //   return (
-  //     <Link href="#" className="btn back-dashboard-arsip">
-  //       Dashboard
-  //     </Link>
-  //   );
-  // };
+  const BackToDashboard = () => {
+    return (
+      <Link href="#" className="btn back-dashboard-arsip">
+        Dashboard
+      </Link>
+    );
+  };
 
-  // useEffect(() => {
-  //   let Dashboard = document.createElement("div");
-  //   let root = createRoot(Dashboard);
-  //   root.render(<BackToDashboard />);
+  useEffect(() => {
+    let Dashboard = document.createElement("div");
+    let root = createRoot(Dashboard);
+    root.render(<BackToDashboard />);
 
-  //   InitTable("#tableArsip", {
-  //     language: {
-  //       info: "Halaman _PAGE_ dari _PAGES_",
-  //       infoEmpty: "tidak ada catatan yang tersedia",
-  //       infoFiltered: "(difilter dari _MAX_ data)",
-  //       lengthMenu: "_MENU_ banyak halaman",
-  //       zeroRecords: "Data tidak ditemukan",
-  //     },
-  //     layout: {
-  //       topStart: [
-  //         {
-  //           search: {
-  //             placeholder: "Cari data",
-  //           },
-  //           pageLength: {
-  //             menu: [
-  //               [10, 25, 100, -1],
-  //               [10, 25, 100, "All"],
-  //             ],
-  //           },
-  //         },
-  //       ],
-  //       topEnd: Dashboard,
-  //     },
-  //   });
-  // }, []);
+    InitTable("#tableArsip", {
+      language: {
+        info: "Halaman _PAGE_ dari _PAGES_",
+        infoEmpty: "tidak ada catatan yang tersedia",
+        infoFiltered: "(difilter dari _MAX_ data)",
+        lengthMenu: "_MENU_ banyak halaman",
+        zeroRecords: "Data tidak ditemukan",
+      },
+      layout: {
+        topStart: [
+          {
+            search: {
+              placeholder: "Cari data",
+            },
+            pageLength: {
+              menu: [
+                [10, 25, 100, -1],
+                [10, 25, 100, "All"],
+              ],
+            },
+          },
+        ],
+        topEnd: Dashboard,
+      },
+    });
+  }, []);
 
   return (
     <div className="arsip-notadinas" data-bs-theme="dark">
@@ -52,7 +52,7 @@ const ArsipNotaDinas = () => {
           <div className="col">
             <div className="card">
               <div className="card-body">
-              {/* <table className="table table-striped p-3 " id="tableArsip">
+              <table className="table table-striped p-3 " id="tableArsip">
                   <thead>
                     <tr>
                       <th>Name</th>
@@ -81,8 +81,8 @@ const ArsipNotaDinas = () => {
                       <td>$170,750</td>
                     </tr>
                   </tbody>
-              </table> */}
-              eror
+              </table>
+              
               </div>
             </div>
           </div>

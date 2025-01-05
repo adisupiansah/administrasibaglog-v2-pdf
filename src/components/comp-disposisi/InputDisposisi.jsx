@@ -72,7 +72,7 @@ const InputDisposisi = () => {
         color: "#D9D9D9",
         background: "#212529",
       }).then(() => {
-        window.location.href = "/disposisi";
+        window.location.href = "/admin/disposisi";
       });
       
       // reset form setelah submit

@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import 'animate.css'
+import "animate.css";
 
 const FormRequest = () => {
   const [data, setData] = useState({
@@ -29,7 +29,6 @@ const FormRequest = () => {
       console.error("Terjadi kesalahan:", error);
     }
   };
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,7 +37,6 @@ const FormRequest = () => {
       [name]: value, // Update hanya properti yang sesuai dengan name
     }));
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,28 +47,32 @@ const FormRequest = () => {
         icon: "error",
         confirmButtonColor: "#72bf78",
         confirmButtonText: "OK",
+        color: "#D9D9D9",
+        background: "#212529",
       });
       return;
     }
-  
+
     try {
       const response = await fetch("/api/client/input", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-  
+
       if (response.ok) {
         Swal.fire({
           title: "Berhasil",
           text: "Data berhasil disimpan",
           icon: "success",
           confirmButtonText: "OK",
+          color: "#D9D9D9",
+          background: "#212529",
         }).then((result) => {
-          if(result.isConfirmed) {
+          if (result.isConfirmed) {
             window.location.reload();
           }
-        }); 
+        });
       } else {
         Swal.fire({
           title: "Gagal",
@@ -109,7 +111,10 @@ const FormRequest = () => {
 
           {/* Form ditampilkan hanya jika isFormVisible true */}
           {isFormVisible && (
-            <form onSubmit={handleSubmit} className="animate__animated animate__zoomIn">
+            <form
+              onSubmit={handleSubmit}
+              className="animate__animated animate__zoomIn"
+            >
               <label>Nama</label>
               <input
                 type="text"
